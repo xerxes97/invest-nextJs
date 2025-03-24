@@ -1,4 +1,5 @@
-import { AppCollapsible, Fund } from "@/components/custom";
+import { AppCollapsible } from "@/components/common";
+import { Fund, TransactionGroup } from "@/components/custom";
 import { IInvestmentModel } from "@/components/interfaces/models";
 
 async function getData() {
@@ -13,15 +14,12 @@ export default async function Home() {
   return (
     <div>
       {investments.map((item: IInvestmentModel) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { transactions, ...rest } = item;
         return (
           <AppCollapsible
             key={item.id}
             header={<Fund {...rest} />}
-            content={<div>{item.description}</div>}
-            // header={<Fund {...rest} />}
-            // content={<TransactionGroup transactions={transactions} />}
+            content={<TransactionGroup transactions={transactions} />}
             // tools={
             //   <Control
             //     newTransaction={() => transactionSheetSetOpen(rest)}

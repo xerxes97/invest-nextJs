@@ -19,4 +19,8 @@ export interface ITransactionModel {
     investmentId: number;
     date?: string;
   }
+
+  export interface ITransactionGroup {
+    transactions?: ITransactionModel[];
+  }
   
