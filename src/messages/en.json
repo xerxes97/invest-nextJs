@@ -10,7 +10,8 @@
     "initialAmount": "Initial Amount",
     "platform": "Platform",
     "balance": "Balance",
-    "type": "Type"
+    "type": "Type",
+    "new": "New Investment" 
   },
   "transactions": {
     "createTransaction": "New Transaction - {{investment}}",

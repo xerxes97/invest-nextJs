@@ -22,7 +22,7 @@ export const AppCollapsible = (props: AppICollapsible) => {
       className="space-y-2 mb-5"
     >
       <div className="border rounded-lg flex items-center justify-between space-x-4 px-4 py-2">
-  {header}
+        {header}
         <div>
           <CollapsibleTrigger asChild>
             <Button variant="ghost" size="sm">

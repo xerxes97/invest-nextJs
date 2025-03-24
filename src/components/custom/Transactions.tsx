@@ -1,7 +1,5 @@
 import { formatNumber } from "@/utils/number";
 import { getAmountColor } from "@/utils/common";
-// import { useTranslation } from "react-i18next";
-import React from "react";
 import { ITransactionGroup, ITransactionModel } from "../interfaces/models";
 import { useTranslations } from "next-intl";
 import { formatDate } from "@/utils/date";
