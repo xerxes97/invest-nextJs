@@ -1,8 +1,8 @@
 import { formatNumber } from "@/utils/number";
 import { getAmountColor } from "@/utils/common";
-import { ITransactionGroup, ITransactionModel } from "../interfaces/models";
 import { useTranslations } from "next-intl";
 import { formatDate } from "@/utils/date";
+import { ITransactionGroup } from "@/components/interfaces/models";
 
 export const TransactionGroup = (props: ITransactionGroup) => {
   const { transactions } = props;

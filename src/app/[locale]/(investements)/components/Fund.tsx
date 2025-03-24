@@ -1,7 +1,7 @@
 import { getAmountColor } from "@/utils/common";
-import { IInvestmentModel } from "../interfaces/models";
 import { useTranslations } from "next-intl";
 import { formatNumber } from "@/utils/number";
+import { IInvestmentModel } from "@/components/interfaces/models";
 
 export const Fund = (props: IInvestmentModel) => {
   const investmentT = useTranslations("investments");

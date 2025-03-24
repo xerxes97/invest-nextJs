@@ -1,5 +1,5 @@
 import { AppCollapsible, AppButton } from "@/components/common";
-import { Fund, TransactionGroup } from "@/components/custom";
+import { Fund, TransactionGroup } from "./components";
 import { IInvestmentModel } from "@/components/interfaces/models";
 
 async function getData() {
