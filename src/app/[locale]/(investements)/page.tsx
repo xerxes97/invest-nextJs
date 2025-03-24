@@ -1,5 +1,5 @@
-import { AppCollapsible, AppButton } from "@/components/common";
-import { Fund, TransactionGroup } from "./components";
+import { AppCollapsible } from "@/components/common";
+import { CreateInvestmentForm, Fund, TransactionGroup } from "./components";
 import { IInvestmentModel } from "@/components/interfaces/models";
 
 async function getData() {
@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <div>
-      <AppButton context="investments" label="new" variant="default" />
+      <CreateInvestmentForm />
       {investments.map((item: IInvestmentModel) => {
         const { transactions, ...rest } = item;
         return (

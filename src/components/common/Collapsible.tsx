@@ -9,9 +9,15 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { AppICollapsible } from "../interfaces/components";
 
-export const AppCollapsible = (props: AppICollapsible) => {
+export interface IAppCollapsibleProps {
+  header: React.ReactNode;
+  content: React.ReactNode;
+  icon?: React.ReactNode;
+  tools?: React.ReactNode;
+}
+
+export const AppCollapsible = (props: IAppCollapsibleProps) => {
   const { header, content, icon, tools } = props;
   const [isOpen, setIsOpen] = React.useState(false);
 
