@@ -1,16 +1,28 @@
 {
-    "Home": {
-      "title": "NextJS i18n Tutorial",
-      "description": "Tutorial of how to manipulate i18n based on route path or domain with  Nextjs v15"
-    },
-    "Step1": {
-      "title": "Step 1 Title",
-      "EXPLANATION_PARAGRAPH1": "lorem ipsum"
-    },
-    "Step2": {
-      "title": "Step 2 Title",
-      "EXPLANATION_PARAGRAPH1": "lorem ipsum",
-      "EXPLANATION_PARAGRAPH2": "lorem ipsum",
-      "EXPLANATION_PARAGRAPH3": "lorem ipsum"
-    }
+  "investments": {
+    "title": "Investments",
+    "name": "Name",
+    "description": "Description",
+    "amount": "Amount",
+    "periodGoal": "Period goal",
+    "endGoal": "End goal",
+    "timePeriod": "Time Period",
+    "initialAmount": "Initial Amount",
+    "platform": "Platform",
+    "balance": "Balance",
+    "type": "Type"
+  },
+  "transactions": {
+    "createTransaction": "New Transaction - {{investment}}",
+    "amount": "Amount",
+    "date": "Date",
+    "description": "Description"
+  },
+  "common": {
+    "period": "Period",
+    "description": "Description",
+    "date": "Date",
+    "select": "Select",
+    "loading": "Loading"
   }
+}

@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 //Async params error fixed with this docs
 //Internationalization reference - http://youtube.com/watch?v=2Jh9olZXBfw&t=633s
 //https://medium.com/@f3ssoftware/internationalization-with-next-js-15-and-react-intl-6b67b5a2d28d
+//Check https://next-intl.dev/docs/getting-started/app-router/with-i18n-routing
 
 export default async function RootLayout({
   children,
@@ -40,7 +41,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <div>{children}</div>
+          <main className="px-6">{children}</main>
         </NextIntlClientProvider>
       </body>
     </html>
