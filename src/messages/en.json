@@ -24,6 +24,8 @@
     "description": "Description",
     "date": "Date",
     "select": "Select",
-    "loading": "Loading"
+    "loading": "Loading",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }
