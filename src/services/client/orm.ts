@@ -61,7 +61,6 @@ export class Orm<T> implements IORM {
   }
 
   async create(props: T, route?: string) {
-    console.log('xyz', route ? `${this.endpointName}/${route}` : this.endpointName);
     const resp = await apiRequest({
       url: route ? `${this.endpointName}/${route}` : this.endpointName,
       method: "POST",

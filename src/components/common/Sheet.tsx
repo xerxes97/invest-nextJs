@@ -24,11 +24,18 @@ type IAsFormProps =
   | { asForm?: false; fields?: null };
 
 export type IAppSheetProps = IAsFormProps & {
-  trigger: string | React.ReactNode;
+  trigger: IAppSheet;
   title: string | React.ReactNode;
   description?: string | React.ReactNode;
   content?: React.ReactNode;
+  open?: boolean;
+  onClose?: () => void;
 };
+
+export interface IAppSheet {
+  label: string;
+  onClick: () => void;
+}
 
 export const AppSheet = (props: IAppSheetProps) => {
   const {
@@ -38,15 +45,17 @@ export const AppSheet = (props: IAppSheetProps) => {
     content,
     asForm = false,
     fields,
+    open,
+    onClose,
   } = props;
   const t = useTranslations("common");
 
   return (
-    <Sheet open>
+    <Sheet open={open}>
       <SheetTrigger asChild>
-        {typeof trigger === "string" ? <Button>{trigger}</Button> : trigger}
+        {<Button onClick={trigger.onClick}>{trigger.label}</Button>}
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent onClose={onClose}>
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
           {description && <SheetDescription>{description}</SheetDescription>}

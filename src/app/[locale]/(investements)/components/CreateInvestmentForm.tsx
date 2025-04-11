@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { CreateInvestmentFieldsList } from "../constants";
 import Investment from "@/services/investments";
 import { IInvestmentDTO } from "@/models/investments";
+import { usePageContext } from "../context";
 const AppSheet = lazy(() => import("@/components/common/Sheet"));
 
 const saveData = async (body: IInvestmentDTO): Promise<void> => {
@@ -18,14 +19,20 @@ const saveData = async (body: IInvestmentDTO): Promise<void> => {
 
 export const CreateInvestmentForm = () => {
   const t = useTranslations("investments");
+  const {
+    newInvestmentModalOpen,
+    events: { openNewInvestmentModal: onClick, closeNewInvestmentModal: onClose },
+  } = usePageContext();
 
   return (
     <AppSheet
-      trigger={t("new")}
+      trigger={{ label: t("new"), onClick }}
       title={t("new")}
       asForm={true}
       fields={CreateInvestmentFieldsList}
       onSubmit={saveData}
+      open={newInvestmentModalOpen}
+      onClose={onClose}
     />
   );
 };
