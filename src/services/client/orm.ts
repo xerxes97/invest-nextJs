@@ -4,7 +4,7 @@ import type {
   IGeneral,
   IORM,
   IOrmConstructor,
-} from "./interfaces";
+} from "../interfaces";
 
 export class Orm implements IORM {
   rows: any;
@@ -12,7 +12,7 @@ export class Orm implements IORM {
   endpointName: string;
 
   constructor(props: IOrmConstructor) {
-    this.method = "initial";
+    this.method = "";
     this.endpointName = props.endpointName;
   }
 
@@ -40,15 +40,11 @@ export class Orm implements IORM {
     };
   }
 
-  /**
-   * method getList enpoint
-   * @returns data any
-   */
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async findOne(id: number) {
     this.method = "findOne";
     const response = await apiRequest({
+      //   filter: { id },
       url: this.endpointName,
     });
 
@@ -65,6 +61,7 @@ export class Orm implements IORM {
   }
 
   async create(props: any, route?: string) {
+    console.log('xyz', route ? `${this.endpointName}/${route}` : this.endpointName);
     const resp = await apiRequest({
       url: route ? `${this.endpointName}/${route}` : this.endpointName,
       method: "POST",

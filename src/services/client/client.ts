@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig, Method } from 'axios';
 
-const BASE_URL = process.env.API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const defaultHeaders = {
   'Content-Type': 'application/json',
@@ -23,6 +23,7 @@ export const apiRequest = async ({
   params,
   data,
 }: ApiRequestOptions) => {
+  console.log("xyz 1", BASE_URL);
   const config: AxiosRequestConfig = {
     baseURL: BASE_URL,
     url,

@@ -1,5 +1,5 @@
 import { IOrmConstructor } from "./interfaces";
-import Orm from "./orm";
+import Orm from "./client/orm";
 
 const ENDPOINT_NAME = 'investments';
 
