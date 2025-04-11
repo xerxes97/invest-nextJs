@@ -3,19 +3,17 @@
 import { lazy } from "react";
 import { useTranslations } from "next-intl";
 import { CreateInvestmentFieldsList } from "../constants";
+import Investment from "@/services/investments";
+import { IInvestmentDTO } from "@/models/investments";
 const AppSheet = lazy(() => import("@/components/common/Sheet"));
-// import { IInvestmentModel } from "@/components/interfaces/models";
 
-const saveData = async (body: unknown): Promise<void> => {
-  console.log(body);
-  const res = await fetch(`${"http://localhost:3002/api/"}investments?userId=1`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    body: JSON.stringify({ ...(body as any), user: 1 }),
-  });
-  if (!res.ok) throw new Error("Error getting data");
-  // return res.json();
+const saveData = async (body: IInvestmentDTO): Promise<void> => {
+  body.amount = Number(body.amount);
+  body.period_goal = Number(body.period_goal);
+  body.end_goal = Number(body.end_goal);
+  body.period = "DAILY";
+  body.user = 1;
+  await Investment.create(body, `?userId=${1}`);
 };
 
 export const CreateInvestmentForm = () => {

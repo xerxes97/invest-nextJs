@@ -6,7 +6,7 @@ import type {
   IOrmConstructor,
 } from "../interfaces";
 
-export class Orm implements IORM {
+export class Orm<T> implements IORM {
   rows: any;
   method: string;
   endpointName: string;
@@ -60,7 +60,7 @@ export class Orm implements IORM {
     };
   }
 
-  async create(props: any, route?: string) {
+  async create(props: T, route?: string) {
     console.log('xyz', route ? `${this.endpointName}/${route}` : this.endpointName);
     const resp = await apiRequest({
       url: route ? `${this.endpointName}/${route}` : this.endpointName,
@@ -71,7 +71,7 @@ export class Orm implements IORM {
     return resp;
   }
 
-  async update(id: number | string, props: any) {
+  async update(id: number | string, props: Partial<T>) {
     const resp = await apiRequest({
       url: `${this.endpointName}/${id}`,
       method: "PUT",

@@ -1,9 +1,10 @@
 import { IOrmConstructor } from "./interfaces";
 import Orm from "./client/orm";
+import { IInvestmentDTO } from "@/models/investments";
 
 const ENDPOINT_NAME = 'investments';
 
-export class InvestmentClass extends Orm {
+export class InvestmentClass extends Orm<IInvestmentDTO> {
   constructor(props: IOrmConstructor) {
     super({ endpointName: props.endpointName });
   }
