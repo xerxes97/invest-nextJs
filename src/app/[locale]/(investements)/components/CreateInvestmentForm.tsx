@@ -37,6 +37,7 @@ export const CreateInvestmentForm = () => {
       asForm={true}
       fields={CreateInvestmentFieldsList}
       onSubmit={async (data: IInvestmentDTO) => {
+        console.log(data);
         await saveData(data);
         router.refresh();
       }}
