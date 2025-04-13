@@ -6,6 +6,8 @@ import { CreateInvestmentFieldsList } from "../constants";
 import Investment from "@/services/investments";
 import { IInvestmentDTO } from "@/models/investments";
 import { usePageContext } from "../context";
+import { useRouter } from "next/navigation";
+
 const AppSheet = lazy(() => import("@/components/common/Sheet"));
 
 const saveData = async (body: IInvestmentDTO): Promise<void> => {
@@ -18,10 +20,14 @@ const saveData = async (body: IInvestmentDTO): Promise<void> => {
 };
 
 export const CreateInvestmentForm = () => {
+  const router = useRouter();
   const t = useTranslations("investments");
   const {
     newInvestmentModalOpen,
-    events: { openNewInvestmentModal: onClick, closeNewInvestmentModal: onClose },
+    events: {
+      openNewInvestmentModal: onClick,
+      closeNewInvestmentModal: onClose,
+    },
   } = usePageContext();
 
   return (
@@ -30,7 +36,10 @@ export const CreateInvestmentForm = () => {
       title={t("new")}
       asForm={true}
       fields={CreateInvestmentFieldsList}
-      onSubmit={saveData}
+      onSubmit={async (data: IInvestmentDTO) => {
+        await saveData(data);
+        router.refresh();
+      }}
       open={newInvestmentModalOpen}
       onClose={onClose}
     />

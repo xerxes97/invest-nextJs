@@ -2,6 +2,7 @@ import { AppCollapsible } from "@/components/common";
 import TransactionGroup from "./Transactions";
 import Fund from "./Fund";
 import { IInvestmentModel } from "@/components/interfaces/models";
+import Control from "./Control";
 
 export const InvestmentList = ({
   investments,
@@ -17,12 +18,12 @@ export const InvestmentList = ({
             key={item.id}
             header={<Fund {...rest} />}
             content={<TransactionGroup transactions={transactions} />}
-            // tools={
-            //   <Control
-            //     newTransaction={() => transactionSheetSetOpen(rest)}
-            //     removeInvestment={() => removeInvestment(rest.id)}
-            //   />
-            // }
+            tools={
+              <Control
+                // newTransaction={() => transactionSheetSetOpen(rest)}
+                // removeInvestment={() => removeInvestment(rest.id)}
+              />
+            }
           />
         );
       })}
