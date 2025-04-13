@@ -1,6 +1,6 @@
-import { CreateInvestmentForm, InvestmentList } from "./components";
+import { CreateInvestmentForm, InvestmentList } from "./(investments)/components";
 import { IInvestmentModel } from "@/components/interfaces/models";
-import { PageProvider } from "./context";
+import { PageProvider } from "./(investments)/context";
 
 const getData = async (): Promise<IInvestmentModel[]> => {
   const res = await fetch(`${process.env.API_URL}investments?userId=1`);
