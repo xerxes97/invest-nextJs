@@ -1,5 +1,4 @@
-export const Login = () => {
-    return <div>Login</div>;
-};
-
-export default Login;
+export default function LoginPage() {
+    return <div>Login Page</div>;
+  }
+  
