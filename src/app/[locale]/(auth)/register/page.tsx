@@ -1,5 +1,3 @@
-export const Register = () => {
+export default function Register() {
     return <div>Register</div>;
 };
-
-export default Register;
