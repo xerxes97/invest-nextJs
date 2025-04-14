@@ -8,6 +8,12 @@ const getData = async (): Promise<IInvestmentModel[]> => {
   return res.json();
 };
 
+export function generateStaticParams() {
+  const locales = ["en", "es", "fr"];
+  console.log("⚡ Generando rutas para:", locales);
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function Home() {
   const investments = await getData();
 

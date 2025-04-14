@@ -1,7 +1,5 @@
 export function generateStaticParams() {
-    return [
-      { locale: 'en' },
-      { locale: 'es' },
-    ];
-  }
-  
+  const locales = ["en", "es", "fr"];
+  console.log("⚡ Generando rutas para:", locales);
+  return locales.map((locale) => ({ locale }));
+}
