@@ -1,6 +1,7 @@
-import { CreateInvestmentForm, InvestmentList } from "./(investments)/components";
+import { CreateInvestmentForm, InvestmentList } from "./components";
 import { IInvestmentModel } from "@/components/interfaces/models";
-import { PageProvider } from "./(investments)/context";
+import { PageProvider } from "./context";
+import { locales } from "@/i18n/routing";
 
 const getData = async (): Promise<IInvestmentModel[]> => {
   const res = await fetch(`${process.env.API_URL}investments?userId=1`);
@@ -9,7 +10,6 @@ const getData = async (): Promise<IInvestmentModel[]> => {
 };
 
 export function generateStaticParams() {
-  const locales = ["en", "es", "fr"];
   console.log("⚡ Generando rutas para:", locales);
   return locales.map((locale) => ({ locale }));
 }
