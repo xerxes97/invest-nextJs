@@ -4,7 +4,8 @@ import { PageProvider } from "./context";
 import { locales } from "@/i18n/routing";
 
 const getData = async (): Promise<IInvestmentModel[]> => {
-  const res = await fetch(`${process.env.API_URL}investments?userId=1`);
+  // const res = await fetch(`${process.env.API_URL}investments?userId=1`);
+  const res = await Promise.resolve({ok: true, json: () => []});
   if (!res.ok) throw new Error("Error getting data");
   return res.json();
 };
