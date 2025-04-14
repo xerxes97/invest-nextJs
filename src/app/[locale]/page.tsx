@@ -1,6 +1,6 @@
-import { CreateInvestmentForm, InvestmentList } from "./components";
+import { CreateInvestmentForm, InvestmentList } from "./(investments)/components";
 import { IInvestmentModel } from "@/components/interfaces/models";
-import { PageProvider } from "./context";
+import { PageProvider } from "./(investments)/context";
 import { locales } from "@/i18n/routing";
 
 const getData = async (): Promise<IInvestmentModel[]> => {
