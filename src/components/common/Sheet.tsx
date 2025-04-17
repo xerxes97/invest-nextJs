@@ -24,7 +24,7 @@ type IAsFormProps =
   | { asForm?: false; fields?: null };
 
 export type IAppSheetProps = IAsFormProps & {
-  trigger: IAppSheet;
+  trigger?: IAppSheet;
   title: string | React.ReactNode;
   description?: string | React.ReactNode;
   content?: React.ReactNode;
@@ -52,9 +52,11 @@ export const AppSheet = (props: IAppSheetProps) => {
 
   return (
     <Sheet open={open}>
-      <SheetTrigger asChild>
-        {<Button onClick={trigger.onClick}>{trigger.label}</Button>}
-      </SheetTrigger>
+      {trigger && (
+        <SheetTrigger asChild>
+          {<Button onClick={trigger.onClick}>{trigger.label}</Button>}
+        </SheetTrigger>
+      )}
       <SheetContent onClose={onClose}>
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>

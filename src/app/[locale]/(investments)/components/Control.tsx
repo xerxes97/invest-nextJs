@@ -8,7 +8,10 @@ import { usePageContext } from "../context";
 export const Control = (props: IControlInvestmentModel) => {
   const { id } = props;
   const {
-    events: { newTransaction: newTrans, removeInvestment: removeTrans },
+    events: {
+      openNewInvestmentTransactionModal: newTrans,
+      removeInvestment: removeTrans,
+    },
   } = usePageContext();
 
   const newTransaction = () => newTrans(props);
