@@ -1,6 +1,7 @@
 import { IGeneralModelProps } from "./general";
 
 export interface IInvestmentDTO {
+  id: number;
   name: string;
   description: string;
   platform: string;
