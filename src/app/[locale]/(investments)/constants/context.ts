@@ -9,5 +9,6 @@ export const pageInitialContext: IpageInitialContext = {
   events: {
     openNewInvestmentModal: () => {},
     closeNewInvestmentModal: () => {},
+    saveNewInvestment: async () => {},
   },
 };
