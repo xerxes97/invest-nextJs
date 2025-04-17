@@ -2,7 +2,7 @@
 
 import { lazy } from "react";
 import { useTranslations } from "next-intl";
-import { CreateInvestmentFieldsList } from "../constants";
+import { CreateInvestmentTransactionFieldsList } from "../constants";
 import { usePageContext } from "../context";
 
 const AppSheet = lazy(() => import("@/components/common/Sheet"));
@@ -21,7 +21,7 @@ export const CreateInvestmentTransactionForm = () => {
         investment: controlInvestmentInfo?.name ?? "",
       })}
       asForm={true}
-      fields={CreateInvestmentFieldsList}
+      fields={CreateInvestmentTransactionFieldsList}
       onSubmit={async () => {}}
       open={newInvestmentTransactionModalOpen}
       onClose={onClose}
