@@ -8,17 +8,18 @@ import { usePageContext } from "../context";
 const AppSheet = lazy(() => import("@/components/common/Sheet"));
 
 export const CreateInvestmentTransactionForm = () => {
-  const t = useTranslations("investments");
+  const t = useTranslations("transactions");
   const {
     newInvestmentTransactionModalOpen,
-    events: {
-      closeNewInvestmentTransactionModal: onClose,
-    },
+    controlInvestmentInfo,
+    events: { closeNewInvestmentTransactionModal: onClose },
   } = usePageContext();
 
   return (
     <AppSheet
-      title={t("new")}
+      title={t("createTransaction", {
+        investment: controlInvestmentInfo?.name ?? "",
+      })}
       asForm={true}
       fields={CreateInvestmentFieldsList}
       onSubmit={async () => {}}

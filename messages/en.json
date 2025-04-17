@@ -14,7 +14,7 @@
     "new": "New Investment" 
   },
   "transactions": {
-    "createTransaction": "New Transaction - {{investment}}",
+    "createTransaction": "New Transaction - {investment}",
     "amount": "Amount",
     "date": "Date",
     "description": "Description"
