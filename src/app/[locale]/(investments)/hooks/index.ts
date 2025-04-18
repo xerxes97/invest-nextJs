@@ -42,9 +42,9 @@ export const useApp = (): IpageInitialContext => {
     closeNewInvestmentModal();
   };
 
-  const removeInvestment = async (id: number): Promise<void> => {
-    await Investment.remove(id);
-    refresh();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const openRemoveInvestmentDialog = async (id: number): Promise<void> => {
+    setState({ ...state, removeInvestmentDialogOpen: true });
   }
 
   const openNewInvestmentModal = () => {
@@ -66,7 +66,7 @@ export const useApp = (): IpageInitialContext => {
       openNewInvestmentModal,
       closeNewInvestmentModal,
       saveNewInvestment,
-      removeInvestment,
+      openRemoveInvestmentDialog,
       newTransaction
     },
   };

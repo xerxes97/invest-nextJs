@@ -10,20 +10,20 @@ export const Control = (props: IControlInvestmentModel) => {
   const {
     events: {
       openNewInvestmentTransactionModal: newTrans,
-      removeInvestment: removeTrans,
+      openRemoveInvestmentDialog,
     },
   } = usePageContext();
 
   const newTransaction = () => newTrans(props);
 
-  const removeInvestment = () => removeTrans(id);
+  const removeInvestmentRequest = () => openRemoveInvestmentDialog(id);
 
   return (
     <div className="w-10">
       <Button variant="ghost" size="sm" onClick={newTransaction}>
         <CircleFadingPlusIcon className="h-4 w-4" />
       </Button>
-      <Button variant="ghost" size="sm" onClick={removeInvestment}>
+      <Button variant="ghost" size="sm" onClick={removeInvestmentRequest}>
         <Trash2 className="h-4 w-4" />
       </Button>
     </div>

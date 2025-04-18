@@ -3,6 +3,7 @@ import { IpageInitialContext, IpageInitialState } from "../interfaces";
 export const pageInitialState: IpageInitialState = {
   newInvestmentModalOpen: false,
   newInvestmentTransactionModalOpen: false,
+  removeInvestmentDialogOpen: false,
 };
 
 export const pageInitialContext: IpageInitialContext = {
@@ -14,6 +15,6 @@ export const pageInitialContext: IpageInitialContext = {
     closeNewInvestmentModal: () => {},
     saveNewInvestment: async () => {},
     newTransaction: async () => {},
-    removeInvestment: async () => {},
+    openRemoveInvestmentDialog: async () => {},
   },
 };

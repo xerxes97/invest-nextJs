@@ -2,6 +2,7 @@ import { IInvestmentDTO, IInvestmentModel } from "@/models/investments";
 
 export interface IpageInitialState {
   newInvestmentModalOpen: boolean;
+  removeInvestmentDialogOpen: boolean;
   // ==========================================================
   newInvestmentTransactionModalOpen: boolean;
   controlInvestmentInfo?: IControlInvestmentModel;
@@ -18,6 +19,6 @@ export interface IpageInitialContext extends IpageInitialState {
     closeNewInvestmentModal: () => void;
     saveNewInvestment: (data: IInvestmentDTO) => Promise<void>;
     newTransaction: (data: IControlInvestmentModel) => Promise<void>;
-    removeInvestment: (id: number) => Promise<void>;
+    openRemoveInvestmentDialog: (id: number) => Promise<void>;
   };
 }

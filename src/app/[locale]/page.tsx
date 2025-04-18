@@ -1,11 +1,18 @@
-import {
-  CreateInvestmentForm,
-  InvestmentList,
-} from "./(investments)/components";
+import { InvestmentList } from "./(investments)/components";
 import { IInvestmentModel } from "@/models/investments";
 import { PageProvider } from "./(investments)/context";
 import { locales } from "@/i18n/routing";
-import CreateInvestmentTransactionForm from "./(investments)/components/CreateInvestmentTransactionForm";
+import { lazy } from "react";
+
+const CreateInvestmentForm = lazy(
+  () => import("./(investments)/components/CreateInvestmentForm")
+);
+const CreateInvestmentTransactionForm = lazy(
+  () => import("./(investments)/components/CreateInvestmentTransactionForm")
+);
+const RemoveInvestmentDialog = lazy(
+  () => import("./(investments)/components/removeInvestmentDialog")
+);
 
 const getData = async (): Promise<IInvestmentModel[]> => {
   const res = await fetch(`${process.env.API_URL}investments?userId=1`);
@@ -24,6 +31,7 @@ export default async function Home() {
 
   return (
     <PageProvider>
+      <RemoveInvestmentDialog />
       <CreateInvestmentForm />
       <CreateInvestmentTransactionForm />
       <InvestmentList investments={investments} />
