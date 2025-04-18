@@ -2,7 +2,7 @@ import {
   CreateInvestmentForm,
   InvestmentList,
 } from "./(investments)/components";
-import { IInvestmentModel } from "@/components/interfaces/models";
+import { IInvestmentModel } from "@/models/investments";
 import { PageProvider } from "./(investments)/context";
 import { locales } from "@/i18n/routing";
 import CreateInvestmentTransactionForm from "./(investments)/components/CreateInvestmentTransactionForm";

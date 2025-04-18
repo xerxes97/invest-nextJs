@@ -1,4 +1,5 @@
 import { IGeneralModelProps } from "./general";
+import { ITransactionModel } from "./transactions";
 
 export interface IInvestmentDTO {
   id: number;
@@ -10,6 +11,7 @@ export interface IInvestmentDTO {
   period: string;
   end_goal: number;
   user: number;
+  transactions?: ITransactionModel[];
 }
 
 export type IInvestmentModel = IInvestmentDTO & IGeneralModelProps;

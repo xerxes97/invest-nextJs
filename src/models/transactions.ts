@@ -23,4 +23,3 @@ export interface ITransactionModel {
   export interface ITransactionGroup {
     transactions?: ITransactionModel[];
   }
-  

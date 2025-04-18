@@ -2,10 +2,7 @@ import { formatNumber } from "@/utils/number";
 import { getAmountColor } from "@/utils/common";
 import { useTranslations } from "next-intl";
 import { formatDate } from "@/utils/date";
-import {
-  ITransactionGroup,
-  ITransactionModel,
-} from "@/components/interfaces/models";
+import { ITransactionGroup, ITransactionModel } from "@/models";
 
 export const TransactionGroup = (props: ITransactionGroup) => {
   const { transactions } = props;

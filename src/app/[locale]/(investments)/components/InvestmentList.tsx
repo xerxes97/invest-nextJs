@@ -3,7 +3,7 @@
 import { AppCollapsible } from "@/components/common";
 import TransactionGroup from "./Transactions";
 import Fund from "./Fund";
-import { IInvestmentModel } from "@/components/interfaces/models";
+import { IInvestmentModel } from "@/models";
 import Control from "./Control";
 
 export const InvestmentList = ({
