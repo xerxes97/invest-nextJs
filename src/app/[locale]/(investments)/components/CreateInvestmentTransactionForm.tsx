@@ -11,14 +11,14 @@ export const CreateInvestmentTransactionForm = () => {
   const t = useTranslations("transactions");
   const {
     newInvestmentTransactionModalOpen,
-    controlInvestmentInfo,
+    investmentInfo,
     events: { closeNewInvestmentTransactionModal: onClose },
   } = usePageContext();
 
   return (
     <AppSheet
       title={t("createTransaction", {
-        investment: controlInvestmentInfo?.name ?? "",
+        investment: investmentInfo?.name ?? "",
       })}
       asForm={true}
       fields={CreateInvestmentTransactionFieldsList}

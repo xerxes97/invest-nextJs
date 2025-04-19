@@ -6,7 +6,6 @@ import { IControlInvestmentModel } from "../interfaces";
 import { usePageContext } from "../context";
 
 export const Control = (props: IControlInvestmentModel) => {
-  const { id } = props;
   const {
     events: {
       openNewInvestmentTransactionModal: newTrans,
@@ -16,7 +15,7 @@ export const Control = (props: IControlInvestmentModel) => {
 
   const newTransaction = () => newTrans(props);
 
-  const removeInvestmentRequest = () => openRemoveInvestmentDialog(id);
+  const removeInvestmentRequest = () => openRemoveInvestmentDialog(props);
 
   return (
     <div className="w-10">

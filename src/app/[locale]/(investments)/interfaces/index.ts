@@ -5,7 +5,7 @@ export interface IpageInitialState {
   removeInvestmentDialogOpen: boolean;
   // ==========================================================
   newInvestmentTransactionModalOpen: boolean;
-  controlInvestmentInfo?: IControlInvestmentModel;
+  investmentInfo?: IControlInvestmentModel;
 }
 
 export type IControlInvestmentModel = Pick<IInvestmentModel, "id" | "name">;
@@ -19,6 +19,7 @@ export interface IpageInitialContext extends IpageInitialState {
     closeNewInvestmentModal: () => void;
     saveNewInvestment: (data: IInvestmentDTO) => Promise<void>;
     newTransaction: (data: IControlInvestmentModel) => Promise<void>;
-    openRemoveInvestmentDialog: (id: number) => Promise<void>;
+    openRemoveInvestmentDialog: (data: IControlInvestmentModel) => Promise<void>;
+    closeRemoveInvestmentDialog: () => void;
   };
 }

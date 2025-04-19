@@ -19,11 +19,11 @@ export const useApp = (): IpageInitialContext => {
   };
 
   const openNewInvestmentTransactionModal = (data: IControlInvestmentModel) => {
-    setState({ ...state, newInvestmentTransactionModalOpen: true, controlInvestmentInfo: data });
+    setState({ ...state, newInvestmentTransactionModalOpen: true, investmentInfo: data });
   }
 
   const closeNewInvestmentTransactionModal = () => {
-    setState({ ...state, newInvestmentTransactionModalOpen: false, controlInvestmentInfo: undefined });
+    setState({ ...state, newInvestmentTransactionModalOpen: false, investmentInfo: undefined });
   }
 
   // ==========================================================
@@ -42,9 +42,12 @@ export const useApp = (): IpageInitialContext => {
     closeNewInvestmentModal();
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const openRemoveInvestmentDialog = async (id: number): Promise<void> => {
-    setState({ ...state, removeInvestmentDialogOpen: true });
+  const openRemoveInvestmentDialog = async (data: IControlInvestmentModel): Promise<void> => {
+    setState({ ...state, removeInvestmentDialogOpen: true, investmentInfo: data });
+  }
+
+  const closeRemoveInvestmentDialog = async (): Promise<void> => {
+    setState({ ...state, removeInvestmentDialogOpen: false, investmentInfo: undefined });
   }
 
   const openNewInvestmentModal = () => {
@@ -67,6 +70,7 @@ export const useApp = (): IpageInitialContext => {
       closeNewInvestmentModal,
       saveNewInvestment,
       openRemoveInvestmentDialog,
+      closeRemoveInvestmentDialog,
       newTransaction
     },
   };

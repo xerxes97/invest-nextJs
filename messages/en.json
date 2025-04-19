@@ -11,7 +11,9 @@
     "platform": "Platform",
     "balance": "Balance",
     "type": "Type",
-    "new": "New Investment" 
+    "new": "New Investment",
+    "remove": "Remove Investment - {investment}",
+    "removeConfirm": "Are you sure you want to remove {investment} investment?"
   },
   "transactions": {
     "createTransaction": "New Transaction - {investment}",
@@ -26,6 +28,7 @@
     "select": "Select",
     "loading": "Loading",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "close": "Close"
   }
 }

@@ -16,5 +16,6 @@ export const pageInitialContext: IpageInitialContext = {
     saveNewInvestment: async () => {},
     newTransaction: async () => {},
     openRemoveInvestmentDialog: async () => {},
+    closeRemoveInvestmentDialog: () => {},
   },
 };
