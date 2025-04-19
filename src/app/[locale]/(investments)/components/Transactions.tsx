@@ -2,7 +2,7 @@ import { formatNumber } from "@/utils/number";
 import { getAmountColor } from "@/utils/common";
 import { useTranslations } from "next-intl";
 import { formatDate } from "@/utils/date";
-import { ITransactionGroup, ITransactionModel } from "@/components/interfaces/models";
+import { ITransactionGroup, ITransactionModel } from "@/models";
 
 export const TransactionGroup = (props: ITransactionGroup) => {
   const { transactions } = props;
@@ -46,23 +46,22 @@ export const TransactionGroup = (props: ITransactionGroup) => {
 };
 
 const Transaction = ({ transaction }: { transaction: ITransactionModel }) => {
-  const investmentT = useTranslations("investments");
-  const commonT = useTranslations("common");
+  const t = useTranslations();
 
   return (
     <div className="mb-2 border rounded-lg space-x-4 px-4 py-2 grid grid-cols-3">
       <p>
-        <span className="text-sm font-medium">{investmentT("amount")} </span>
+        <span className="text-sm font-medium">{t("investments.amount")} </span>
         <span className={`font-medium ${getAmountColor(transaction.amount)}`}>
           $ {formatNumber(Number(transaction.amount))}
         </span>
       </p>
       <p>
-        <span className="text-sm font-medium">{commonT("date")}</span>:{" "}
+        <span className="text-sm font-medium">{t("common.date")}</span>:{" "}
         {formatDate(transaction.date)}
       </p>
       <p>
-        <span className="text-sm font-medium">{investmentT("type")}</span>:{" "}
+        <span className="text-sm font-medium">{t("investments.type")}</span>:{" "}
         {transaction.description}
       </p>
     </div>
