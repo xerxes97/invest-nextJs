@@ -8,7 +8,7 @@ export const RemoveInvestmentDialog = () => {
   const {
     removeInvestmentDialogOpen,
     investmentInfo,
-    events: { closeRemoveInvestmentDialog: onClose },
+    events: { closeRemoveInvestmentDialog: onClose, removeInvestment },
   } = usePageContext();
 
   const t = useTranslations("investments");
@@ -24,6 +24,7 @@ export const RemoveInvestmentDialog = () => {
       onClose={onClose}
       title={title}
       content={content}
+      onConfirm={removeInvestment}
     />
   );
 };

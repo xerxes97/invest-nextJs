@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { IControlInvestmentModel, IpageInitialContext, IpageInitialState } from "../interfaces";
+import {
+  IControlInvestmentModel,
+  IpageInitialContext,
+  IpageInitialState,
+} from "../interfaces";
 import { pageInitialState } from "../constants/context";
 import { IInvestmentDTO } from "@/models/investments";
 import { useRouter } from "next/navigation";
@@ -10,21 +14,36 @@ export const useApp = (): IpageInitialContext => {
   const router = useRouter();
   const refresh = () => router.refresh();
 
+  const changeState = async (states: Partial<IpageInitialState>) => {
+    setState((prevState) => ({
+      ...prevState,
+      ...states,
+    }));
+  };
+
   // Transactions
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const newTransaction = async (body: IControlInvestmentModel): Promise<void> => {
+  const newTransaction = async (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    body: IControlInvestmentModel
+  ): Promise<void> => {
     refresh();
     closeNewInvestmentModal();
   };
 
   const openNewInvestmentTransactionModal = (data: IControlInvestmentModel) => {
-    setState({ ...state, newInvestmentTransactionModalOpen: true, investmentInfo: data });
-  }
+    changeState({
+      newInvestmentTransactionModalOpen: true,
+      investmentInfo: data,
+    });
+  };
 
   const closeNewInvestmentTransactionModal = () => {
-    setState({ ...state, newInvestmentTransactionModalOpen: false, investmentInfo: undefined });
-  }
+    changeState({
+      newInvestmentTransactionModalOpen: false,
+      investmentInfo: undefined,
+    });
+  };
 
   // ==========================================================
 
@@ -42,20 +61,35 @@ export const useApp = (): IpageInitialContext => {
     closeNewInvestmentModal();
   };
 
-  const openRemoveInvestmentDialog = async (data: IControlInvestmentModel): Promise<void> => {
-    setState({ ...state, removeInvestmentDialogOpen: true, investmentInfo: data });
-  }
+  const removeInvestment = async (): Promise<void> => {
+    const investmentId = state.investmentInfo?.id;
+    if(investmentId){
+      await Investment.remove(investmentId);
+      refresh();
+    }
+    // On error - show toast
+    closeRemoveInvestmentDialog();
+  };
 
-  const closeRemoveInvestmentDialog = async (): Promise<void> => {
-    setState({ ...state, removeInvestmentDialogOpen: false, investmentInfo: undefined });
-  }
+  const openRemoveInvestmentDialog = async (
+    data: IControlInvestmentModel
+  ): Promise<void> => {
+    changeState({ removeInvestmentDialogOpen: true, investmentInfo: data });
+  };
+
+  const closeRemoveInvestmentDialog = (): void => {
+    changeState({
+      removeInvestmentDialogOpen: false,
+      investmentInfo: undefined,
+    });
+  };
 
   const openNewInvestmentModal = () => {
-    setState({ ...state, newInvestmentModalOpen: true });
+    changeState({ newInvestmentModalOpen: true });
   };
 
   const closeNewInvestmentModal = () => {
-    setState({ ...state, newInvestmentModalOpen: false });
+    changeState({ newInvestmentModalOpen: false });
   };
 
   // ==========================================================
@@ -65,13 +99,14 @@ export const useApp = (): IpageInitialContext => {
     events: {
       openNewInvestmentTransactionModal,
       closeNewInvestmentTransactionModal,
+      newTransaction,
       // ==========================================================
       openNewInvestmentModal,
       closeNewInvestmentModal,
-      saveNewInvestment,
       openRemoveInvestmentDialog,
       closeRemoveInvestmentDialog,
-      newTransaction
+      removeInvestment,
+      saveNewInvestment,
     },
   };
 };

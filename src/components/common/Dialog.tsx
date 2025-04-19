@@ -17,10 +17,11 @@ export interface IAppDialogProps {
   description?: string;
   trigger?: string;
   onClose?: () => void;
+  onConfirm?: () => void;
 }
 
 export function AppDialog(props: Readonly<IAppDialogProps>) {
-  const { open, trigger, onClose, title, description, content } = props;
+  const { open, trigger, onClose, title, description, content, onConfirm } = props;
   const t = useTranslations("common");
 
   return (
@@ -36,11 +37,10 @@ export function AppDialog(props: Readonly<IAppDialogProps>) {
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <div className="grid gap-4 py-4">{content}</div>
-        {onClose && (
-          <DialogFooter>
-            <Button onClick={onClose}>{t("cancel")}</Button>
-          </DialogFooter>
-        )}
+        <DialogFooter>
+          {onConfirm && <Button onClick={onConfirm}>{t("confirm")}</Button>}
+          {onClose && <Button onClick={onClose}>{t("cancel")}</Button>}
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
