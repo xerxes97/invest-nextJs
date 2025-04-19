@@ -29,6 +29,7 @@
     "loading": "Loading",
     "save": "Save",
     "cancel": "Cancel",
-    "close": "Close"
+    "close": "Close",
+    "confirm": "Confirm"
   }
 }
