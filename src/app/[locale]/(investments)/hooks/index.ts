@@ -8,11 +8,14 @@ import { pageInitialState } from "../constants/context";
 import { IInvestmentDTO } from "@/models/investments";
 import { useRouter } from "next/navigation";
 import Investment from "@/services/investments";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export const useApp = (): IpageInitialContext => {
   const [state, setState] = useState<IpageInitialState>(pageInitialState);
   const router = useRouter();
   const refresh = () => router.refresh();
+  const t = useTranslations("investments");
 
   const changeState = async (states: Partial<IpageInitialState>) => {
     setState((prevState) => ({
@@ -56,18 +59,27 @@ export const useApp = (): IpageInitialContext => {
     body.end_goal = Number(body.end_goal);
     body.period = "DAILY";
     body.user = 1;
-    await Investment.create(body, `?userId=${1}`);
+    const createInvestment = Investment.create(body, `?userId=${1}`);
+    toast.promise(createInvestment, {
+      loading: t("newCreating"),
+      success: t("newSuccess"),
+      error: t("newError"),
+    });
     refresh();
     closeNewInvestmentModal();
   };
 
   const removeInvestment = async (): Promise<void> => {
     const investmentId = state.investmentInfo?.id;
-    if(investmentId){
-      await Investment.remove(investmentId);
+    if (investmentId) {
+      const removeInvestment = Investment.remove(investmentId);
+      toast.promise(removeInvestment, {
+        loading: t("removeLoading"),
+        success: t("removeSuccess"),
+        error: t("removeError"),
+      });
       refresh();
     }
-    // On error - show toast
     closeRemoveInvestmentDialog();
   };
 
