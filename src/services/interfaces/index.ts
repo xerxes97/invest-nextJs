@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+export type IEndpointNames = "investments" | "transaction-types";
+
 export interface IOrmConstructor {
-    endpointName: string;
+    endpointName: IEndpointNames;
   }
   
   export interface IfindResponse {

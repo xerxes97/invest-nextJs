@@ -32,10 +32,11 @@
     "description": "Description",
     "date": "Date",
     "select": "Select",
-    "loading": "Loading",
+    "loading": "Loading...",
     "save": "Save",
     "cancel": "Cancel",
     "close": "Close",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "noOptions": "No options"
   }
 }

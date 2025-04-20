@@ -13,4 +13,5 @@ export class InvestmentClass extends Orm<IInvestmentDTO> {
 export const Investment = new InvestmentClass({
   endpointName: ENDPOINT_NAME,
 });
+
 export default Investment;

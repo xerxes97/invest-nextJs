@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiRequest } from "./client";
-import type {
-  IGeneral,
-  IORM,
-  IOrmConstructor,
-} from "../interfaces";
+import type { IGeneral, IORM, IOrmConstructor } from "../interfaces";
 
 export class Orm<T> implements IORM {
   rows: any;
@@ -26,8 +22,11 @@ export class Orm<T> implements IORM {
     const props: IGeneral = {
       filter,
     };
-    const rows = await apiRequest({ ...props, url: this.endpointName });
-    const total = rows.length;
+    const { rows, count } = await apiRequest({
+      ...props,
+      url: this.endpointName,
+    });
+    const total = count;
     const val = total > 0;
 
     this.rows = rows;

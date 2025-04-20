@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Investment from "@/services/investments";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { fixNumberFormat } from "@/utils/number";
 
 export const useApp = (): IpageInitialContext => {
   const [state, setState] = useState<IpageInitialState>(pageInitialState);
@@ -54,18 +55,20 @@ export const useApp = (): IpageInitialContext => {
   // New investment control section
 
   const saveNewInvestment = async (body: IInvestmentDTO): Promise<void> => {
-    body.amount = Number(body.amount);
-    body.period_goal = Number(body.period_goal);
-    body.end_goal = Number(body.end_goal);
+    body.amount = fixNumberFormat(body.amount);
+    body.period_goal = fixNumberFormat(body.period_goal);
+    body.end_goal = fixNumberFormat(body.end_goal);
     body.period = "DAILY";
     body.user = 1;
     const createInvestment = Investment.create(body, `?userId=${1}`);
     toast.promise(createInvestment, {
       loading: t("newCreating"),
-      success: t("newSuccess"),
+      success: () => {
+        refresh();
+        return t("newSuccess");
+      },
       error: t("newError"),
     });
-    refresh();
     closeNewInvestmentModal();
   };
 
@@ -75,10 +78,12 @@ export const useApp = (): IpageInitialContext => {
       const removeInvestment = Investment.remove(investmentId);
       toast.promise(removeInvestment, {
         loading: t("removeLoading"),
-        success: t("removeSuccess"),
+        success: () => {
+          refresh();
+          return t("removeSuccess");
+        },
         error: t("removeError"),
       });
-      refresh();
     }
     closeRemoveInvestmentDialog();
   };
