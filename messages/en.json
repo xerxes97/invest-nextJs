@@ -12,7 +12,13 @@
     "balance": "Balance",
     "type": "Type",
     "new": "New Investment",
+    "newCreating": "Creating Investment",
+    "newSuccess": "New Investment created successfully",
+    "newError": "Error creating Investment",
     "remove": "Remove Investment - {investment}",
+    "removeError": "Error removing Investment",
+    "removeSuccess": "Investment removed successfully",
+    "removeLoading": "Removing Investment",
     "removeConfirm": "Are you sure you want to remove {investment} investment?"
   },
   "transactions": {
