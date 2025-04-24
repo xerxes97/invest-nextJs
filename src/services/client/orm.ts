@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiRequest } from "./client";
-import type { IGeneral, IORM, IOrmConstructor } from "../interfaces";
+import type { IGeneral, IORM, IOrmConstructor } from "./interfaces";
 
 export class Orm<T> implements IORM {
   rows: any;

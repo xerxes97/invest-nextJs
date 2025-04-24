@@ -15,3 +15,12 @@ export interface IInvestmentDTO {
 }
 
 export type IInvestmentModel = IInvestmentDTO & IGeneralModelProps;
+
+export interface ITransactionDTO {
+  id: number;
+  typeId: number;
+  date: string;
+  description: string;
+  amount: number;
+  investmentId: number;
+}

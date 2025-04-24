@@ -21,7 +21,7 @@ import React, { useActionState } from "react";
 import { Input } from "../ui/input";
 import AppSelect, { ISelectOption } from "./Select";
 import { AppAsyncSelect } from "./AsyncSelect";
-import { IEndpointNames } from "@/services/interfaces";
+import { IEndpointNames } from "@/services/client/interfaces";
 
 type FormTypes =
   | "text"
@@ -132,14 +132,13 @@ const Fields = ({
               return (
                 <FormItem className="mb-4 last:mb-9">
                   <FormLabel>{label}</FormLabel>
-                  {type === "number" ||
-                    (type === "text" && (
-                      <TextField
-                        field={field}
-                        placeholder={placeholder}
-                        isNumber
-                      />
-                    ))}
+                  {(type === "number" || type === "text") && (
+                    <TextField
+                      field={field}
+                      placeholder={placeholder}
+                      isNumber={type === "number"}
+                    />
+                  )}
                   {type === "select" && (
                     <AppSelect
                       field={field}

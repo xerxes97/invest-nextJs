@@ -5,17 +5,15 @@ import {
   IpageInitialState,
 } from "../interfaces";
 import { pageInitialState } from "../constants/context";
-import { IInvestmentDTO } from "@/models/investments";
-import { useRouter } from "next/navigation";
-import Investment from "@/services/investments";
-import { toast } from "sonner";
+import { IInvestmentDTO, ITransactionDTO } from "@/models/investments";
+import { Investment, Transaction } from "@/services";
 import { useTranslations } from "next-intl";
 import { fixNumberFormat } from "@/utils/number";
+import { useAlert } from "@/hooks/useAlert";
 
 export const useApp = (): IpageInitialContext => {
   const [state, setState] = useState<IpageInitialState>(pageInitialState);
-  const router = useRouter();
-  const refresh = () => router.refresh();
+  const { alertPromise } = useAlert();
   const t = useTranslations("investments");
 
   const changeState = async (states: Partial<IpageInitialState>) => {
@@ -27,11 +25,9 @@ export const useApp = (): IpageInitialContext => {
 
   // Transactions
 
-  const newTransaction = async (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    body: IControlInvestmentModel
-  ): Promise<void> => {
-    refresh();
+  const newTransaction = async (body: ITransactionDTO): Promise<void> => {
+    await Transaction.create(body, `?userId=${1}`);
+    // refresh();
     closeNewInvestmentModal();
   };
 
@@ -60,13 +56,11 @@ export const useApp = (): IpageInitialContext => {
     body.end_goal = fixNumberFormat(body.end_goal);
     body.period = "DAILY";
     body.user = 1;
-    const createInvestment = Investment.create(body, `?userId=${1}`);
-    toast.promise(createInvestment, {
+    const func = Investment.create(body, `?userId=${1}`);
+    alertPromise({
+      func,
       loading: t("newCreating"),
-      success: () => {
-        refresh();
-        return t("newSuccess");
-      },
+      success: t("newSuccess"),
       error: t("newError"),
     });
     closeNewInvestmentModal();
@@ -75,13 +69,11 @@ export const useApp = (): IpageInitialContext => {
   const removeInvestment = async (): Promise<void> => {
     const investmentId = state.investmentInfo?.id;
     if (investmentId) {
-      const removeInvestment = Investment.remove(investmentId);
-      toast.promise(removeInvestment, {
+      const func = Investment.remove(investmentId);
+      alertPromise({
+        func,
         loading: t("removeLoading"),
-        success: () => {
-          refresh();
-          return t("removeSuccess");
-        },
+        success: t("removeSuccess"),
         error: t("removeError"),
       });
     }

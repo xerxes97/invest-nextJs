@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type IEndpointNames = "investments" | "transaction-types";
+export type IEndpointNames = "investments" | "transaction-types" | "transactions";
 
 export interface IOrmConstructor {
     endpointName: IEndpointNames;
   }
   
-  export interface IfindResponse {
+  export interface IResponse {
     val: boolean;
     valMsg: string;
     total: number;
@@ -17,11 +17,11 @@ export interface IOrmConstructor {
     rows: any;
     method: string;
     endpointName: string;
-    find: (filter: object) => Promise<IfindResponse>;
-    findOne: (id: number) => Promise<IfindResponse>;
-    create: (props: any, route?: string) => Promise<IfindResponse>;
-    update: (id: number | string, props: any) => Promise<IfindResponse>;
-    remove: (id: number | string) => Promise<IfindResponse>;
+    find: (filter: object) => Promise<IResponse>;
+    findOne: (id: number) => Promise<IResponse>;
+    create: (props: any, route?: string) => Promise<IResponse>;
+    update: (id: number | string, props: any) => Promise<IResponse>;
+    remove: (id: number | string) => Promise<IResponse>;
   }
   
   export interface IGeneral {

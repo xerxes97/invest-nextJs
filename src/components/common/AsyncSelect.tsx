@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import AppSelect, { ISelectField, ISelectOption } from "./Select";
 import Orm from "@/services/client/orm";
-import { IEndpointNames } from "@/services/interfaces";
+import { IEndpointNames } from "@/services/client/interfaces";
 import { useTranslations } from "next-intl";
 
 export type IAsyncSelectProps = Omit<ISelectField, "options"> & {
