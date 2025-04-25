@@ -51,7 +51,7 @@ const Transaction = ({ transaction }: { transaction: ITransactionModel }) => {
   return (
     <div className="mb-2 border rounded-lg space-x-4 px-4 py-2 grid grid-cols-3">
       <p>
-        <span className="text-sm font-medium">{t("investments.amount")} </span>
+        <span className="text-sm font-medium">{t("piggy.amount")} </span>
         <span className={`font-medium ${getAmountColor(transaction.amount)}`}>
           $ {formatNumber(Number(transaction.amount))}
         </span>
@@ -61,7 +61,7 @@ const Transaction = ({ transaction }: { transaction: ITransactionModel }) => {
         {formatDate(transaction.date)}
       </p>
       <p>
-        <span className="text-sm font-medium">{t("investments.type")}</span>:{" "}
+        <span className="text-sm font-medium">{t("piggy.type")}</span>:{" "}
         {transaction.description}
       </p>
     </div>

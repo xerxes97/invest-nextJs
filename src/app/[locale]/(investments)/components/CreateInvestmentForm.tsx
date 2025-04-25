@@ -8,7 +8,7 @@ import { usePageContext } from "../context";
 const AppSheet = lazy(() => import("@/components/common/Sheet"));
 
 export const CreateInvestmentForm = () => {
-  const t = useTranslations("investments");
+  const t = useTranslations("piggy");
   const {
     newInvestmentModalOpen,
     events: {

@@ -21,6 +21,7 @@ export const CreateInvestmentTransactionFieldsList: IAppFormFieldProps[] = [
       options.map((option) => ({
         label: option.name,
         value: String(option.id),
+        status: option.status,
       })),
   },
   { name: "description", label: "Description", type: "text" },

@@ -12,7 +12,7 @@ export const Fund = (props: IInvestmentModel) => {
         <p className="text-sm font-medium">{props.name}</p>
         <p>
           <span className="text-sm font-medium">
-            {t("investments.balance")}
+            {t("piggy.balance")}
           </span>
           <span>: </span>
           <span className={`font-medium ${getAmountColor(props.amount)}`}>
