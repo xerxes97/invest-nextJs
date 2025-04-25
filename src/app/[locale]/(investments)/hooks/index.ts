@@ -5,17 +5,16 @@ import {
   IpageInitialState,
 } from "../interfaces";
 import { pageInitialState } from "../constants/context";
-import { IInvestmentDTO } from "@/models/investments";
-import { useRouter } from "next/navigation";
-import Investment from "@/services/investments";
-import { toast } from "sonner";
+import { IInvestmentDTO, ITransactionDTO } from "@/models/investments";
+import { Investment, Transaction } from "@/services";
 import { useTranslations } from "next-intl";
+import { fixNumberFormat } from "@/utils/number";
+import { useAlert } from "@/hooks/useAlert";
 
 export const useApp = (): IpageInitialContext => {
   const [state, setState] = useState<IpageInitialState>(pageInitialState);
-  const router = useRouter();
-  const refresh = () => router.refresh();
-  const t = useTranslations("investments");
+  const { alertPromise } = useAlert();
+  const t = useTranslations();
 
   const changeState = async (states: Partial<IpageInitialState>) => {
     setState((prevState) => ({
@@ -26,12 +25,19 @@ export const useApp = (): IpageInitialContext => {
 
   // Transactions
 
-  const newTransaction = async (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    body: IControlInvestmentModel
-  ): Promise<void> => {
-    refresh();
-    closeNewInvestmentModal();
+  const newTransaction = async (body: ITransactionDTO): Promise<void> => {
+    const investmentId = state.investmentInfo?.id;
+    if (!investmentId) return;
+    body.amount = fixNumberFormat(body.amount);
+    body.investmentId = investmentId;
+    const func = Transaction.create(body);
+    alertPromise({
+      func,
+      loading: t("transactions.newLoading"),
+      success: t("transactions.newSuccess"),
+      error: t("transactions.newError"),
+    });
+    closeNewInvestmentTransactionModal();
   };
 
   const openNewInvestmentTransactionModal = (data: IControlInvestmentModel) => {
@@ -54,31 +60,31 @@ export const useApp = (): IpageInitialContext => {
   // New investment control section
 
   const saveNewInvestment = async (body: IInvestmentDTO): Promise<void> => {
-    body.amount = Number(body.amount);
-    body.period_goal = Number(body.period_goal);
-    body.end_goal = Number(body.end_goal);
+    body.amount = fixNumberFormat(body.amount);
+    body.period_goal = fixNumberFormat(body.period_goal);
+    body.end_goal = fixNumberFormat(body.end_goal);
     body.period = "DAILY";
     body.user = 1;
-    const createInvestment = Investment.create(body, `?userId=${1}`);
-    toast.promise(createInvestment, {
-      loading: t("newCreating"),
-      success: t("newSuccess"),
-      error: t("newError"),
+    const func = Investment.create(body, `?userId=${1}`);
+    alertPromise({
+      func,
+      loading: t("investments.newLoading"),
+      success: t("investments.newSuccess"),
+      error: t("investments.newError"),
     });
-    refresh();
     closeNewInvestmentModal();
   };
 
   const removeInvestment = async (): Promise<void> => {
     const investmentId = state.investmentInfo?.id;
     if (investmentId) {
-      const removeInvestment = Investment.remove(investmentId);
-      toast.promise(removeInvestment, {
-        loading: t("removeLoading"),
-        success: t("removeSuccess"),
-        error: t("removeError"),
+      const func = Investment.remove(investmentId);
+      alertPromise({
+        func,
+        loading: t("investments.removeLoading"),
+        success: t("investments.removeSuccess"),
+        error: t("investments.removeError"),
       });
-      refresh();
     }
     closeRemoveInvestmentDialog();
   };

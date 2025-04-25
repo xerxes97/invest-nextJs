@@ -12,7 +12,7 @@
     "balance": "Balance",
     "type": "Type",
     "new": "New Investment",
-    "newCreating": "Creating Investment",
+    "newLoading": "Creating Investment",
     "newSuccess": "New Investment created successfully",
     "newError": "Error creating Investment",
     "remove": "Remove Investment - {investment}",
@@ -25,17 +25,21 @@
     "createTransaction": "New Transaction - {investment}",
     "amount": "Amount",
     "date": "Date",
-    "description": "Description"
+    "description": "Description",
+    "newLoading": "Creating Transaction",
+    "newSuccess": "Transaction created successfully",
+    "newError": "Error creating Transaction"
   },
   "common": {
     "period": "Period",
     "description": "Description",
     "date": "Date",
     "select": "Select",
-    "loading": "Loading",
+    "loading": "Loading...",
     "save": "Save",
     "cancel": "Cancel",
     "close": "Close",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "noOptions": "No options"
   }
 }

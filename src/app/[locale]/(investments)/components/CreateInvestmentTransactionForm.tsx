@@ -12,7 +12,7 @@ export const CreateInvestmentTransactionForm = () => {
   const {
     newInvestmentTransactionModalOpen,
     investmentInfo,
-    events: { closeNewInvestmentTransactionModal: onClose },
+    events: { closeNewInvestmentTransactionModal: onClose, newTransaction },
   } = usePageContext();
 
   return (
@@ -22,7 +22,7 @@ export const CreateInvestmentTransactionForm = () => {
       })}
       asForm={true}
       fields={CreateInvestmentTransactionFieldsList}
-      onSubmit={async () => {}}
+      onSubmit={newTransaction}
       open={newInvestmentTransactionModalOpen}
       onClose={onClose}
     />

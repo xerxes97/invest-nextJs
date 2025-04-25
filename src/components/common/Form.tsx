@@ -1,5 +1,11 @@
 "use client";
-import { Control, useForm, useFormContext } from "react-hook-form";
+import {
+  Control,
+  ControllerRenderProps,
+  FieldValues,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodRawShape } from "zod";
 import {
@@ -13,10 +19,14 @@ import {
 } from "../ui/form";
 import React, { useActionState } from "react";
 import { Input } from "../ui/input";
+import AppSelect, { ISelectOption } from "./Select";
+import { AppAsyncSelect } from "./AsyncSelect";
+import { IEndpointNames } from "@/services/client/interfaces";
 
 type FormTypes =
   | "text"
   | "select"
+  | "asyncSelect"
   | "autocomplete"
   | "date"
   | "number"
@@ -28,6 +38,16 @@ export interface IAppFormFieldProps {
   description?: string;
   label?: string;
   placeholder?: string;
+  resource?: IEndpointNames;
+  options?: ISelectOption[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formatOptions?: (options: any[]) => ISelectOption[];
+}
+
+export interface ITextField {
+  field: ControllerRenderProps<FieldValues, string>;
+  placeholder?: string;
+  isNumber?: boolean;
 }
 
 export interface IAppFormProps {
@@ -50,17 +70,13 @@ export const AppForm = (props: IAppFormProps) => {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, submitAction, isPending] = useActionState(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async (_: unknown, formData: any) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
-      const data = Object.fromEntries(formData);
-      await onSubmit(data);
-      return data;
-    },
-    {}
-  );
+  const [_, submitAction, isPending] = useActionState(async () => {
+    const isValid = await form.trigger();
+    if (!isValid) return;
+    const data = form.getValues();
+    await onSubmit(data);
+    return data;
+  }, {});
 
   return (
     <Form {...form}>
@@ -93,42 +109,62 @@ const Fields = ({
   console.log(watchedValues);
   return (
     <>
-      {fields.map(({ name, label, placeholder, description, type }) => (
-        <FormField
-          key={name}
-          control={control}
-          name={name}
-          render={({ field }) => {
-            return (
-              <FormItem className="mb-4 last:mb-9">
-                <FormLabel>{label}</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder={placeholder}
-                    {...field}
-                    onKeyDown={(event) => {
-                      if (type === "number") {
-                        if (!/\d/.test(event.key)) {
-                          event.preventDefault();
-                        }
-                      }
-                    }}
-                  />
-                </FormControl>
-                {description && (
-                  <FormDescription>{description}</FormDescription>
-                )}
-                <FormMessage />
-              </FormItem>
-            );
-          }}
-        />
-      ))}
+      {fields.map(
+        ({
+          name,
+          label,
+          placeholder,
+          description,
+          type,
+          resource,
+          options,
+          formatOptions,
+        }) => (
+          <FormField
+            key={name}
+            control={control}
+            name={name}
+            render={({ field }) => {
+              return (
+                <FormItem className="mb-4 last:mb-9">
+                  <FormLabel>{label}</FormLabel>
+                  {(type === "number" || type === "text") && (
+                    <TextField
+                      field={field}
+                      placeholder={placeholder}
+                      isNumber={type === "number"}
+                    />
+                  )}
+                  {type === "select" && (
+                    <AppSelect
+                      field={field}
+                      options={options}
+                      placeholder={placeholder}
+                    />
+                  )}
+                  {type === "asyncSelect" && resource && (
+                    <AppAsyncSelect
+                      field={field}
+                      placeholder={placeholder}
+                      resource={resource}
+                      formatOptions={formatOptions}
+                    />
+                  )}
+                  {description && (
+                    <FormDescription>{description}</FormDescription>
+                  )}
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+        )
+      )}
     </>
   );
 };
 
-export const generateFormSchema = (
+const generateFormSchema = (
   fields: IAppFormFieldProps[]
 ): { formSchema: ZodRawShape; defaultValues: { [key: string]: string } } => {
   const formSchema: ZodRawShape = {};
@@ -151,5 +187,23 @@ const numberValidator = () =>
     .string()
     .transform((value) => Number(value))
     .pipe(z.number().min(0, { message: "Too short" }));
+
+const TextField = (props: ITextField) => {
+  const { field, placeholder = "", isNumber } = props;
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isNumber && !/\d/.test(event.key)) {
+      event.preventDefault();
+    }
+  };
+  return (
+    <FormControl>
+      <Input
+        placeholder={placeholder}
+        {...field}
+        {...(isNumber && { onKeyDown })}
+      />
+    </FormControl>
+  );
+};
 
 export default AppForm;
