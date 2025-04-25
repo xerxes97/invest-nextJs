@@ -9,6 +9,8 @@ import {
 } from "../ui/select";
 import { useTranslations } from "next-intl";
 
+export type ISelectStatus = "ENABLED" | "DISABLED";
+
 export interface ISelectField {
   field: ControllerRenderProps<FieldValues, string>;
   placeholder?: string;
@@ -18,6 +20,7 @@ export interface ISelectField {
 export interface ISelectOption {
   value: string;
   label: string;
+  status?: ISelectStatus;
 }
 
 export const AppSelect = (props: ISelectField) => {
@@ -33,7 +36,11 @@ export const AppSelect = (props: ISelectField) => {
       <SelectContent>
         {options ? (
           options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem
+              key={option.value}
+              value={option.value}
+              disabled={option.status === "DISABLED"}
+            >
               {option.label}
             </SelectItem>
           ))
