@@ -14,7 +14,7 @@ import { useAlert } from "@/hooks/useAlert";
 export const useApp = (): IpageInitialContext => {
   const [state, setState] = useState<IpageInitialState>(pageInitialState);
   const { alertPromise } = useAlert();
-  const t = useTranslations("investments");
+  const t = useTranslations();
 
   const changeState = async (states: Partial<IpageInitialState>) => {
     setState((prevState) => ({
@@ -26,9 +26,18 @@ export const useApp = (): IpageInitialContext => {
   // Transactions
 
   const newTransaction = async (body: ITransactionDTO): Promise<void> => {
-    await Transaction.create(body, `?userId=${1}`);
-    // refresh();
-    closeNewInvestmentModal();
+    const investmentId = state.investmentInfo?.id;
+    if (!investmentId) return;
+    body.amount = fixNumberFormat(body.amount);
+    body.investmentId = investmentId;
+    const func = Transaction.create(body);
+    alertPromise({
+      func,
+      loading: t("transactions.newLoading"),
+      success: t("transactions.newSuccess"),
+      error: t("transactions.newError"),
+    });
+    closeNewInvestmentTransactionModal();
   };
 
   const openNewInvestmentTransactionModal = (data: IControlInvestmentModel) => {
@@ -59,9 +68,9 @@ export const useApp = (): IpageInitialContext => {
     const func = Investment.create(body, `?userId=${1}`);
     alertPromise({
       func,
-      loading: t("newCreating"),
-      success: t("newSuccess"),
-      error: t("newError"),
+      loading: t("investments.newLoading"),
+      success: t("investments.newSuccess"),
+      error: t("investments.newError"),
     });
     closeNewInvestmentModal();
   };
@@ -72,9 +81,9 @@ export const useApp = (): IpageInitialContext => {
       const func = Investment.remove(investmentId);
       alertPromise({
         func,
-        loading: t("removeLoading"),
-        success: t("removeSuccess"),
-        error: t("removeError"),
+        loading: t("investments.removeLoading"),
+        success: t("investments.removeSuccess"),
+        error: t("investments.removeError"),
       });
     }
     closeRemoveInvestmentDialog();

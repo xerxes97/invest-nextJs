@@ -70,17 +70,13 @@ export const AppForm = (props: IAppFormProps) => {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, submitAction, isPending] = useActionState(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async (_: unknown, formData: any) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
-      const data = Object.fromEntries(formData);
-      await onSubmit(data);
-      return data;
-    },
-    {}
-  );
+  const [_, submitAction, isPending] = useActionState(async () => {
+    const isValid = await form.trigger();
+    if (!isValid) return;
+    const data = form.getValues();
+    await onSubmit(data);
+    return data;
+  }, {});
 
   return (
     <Form {...form}>

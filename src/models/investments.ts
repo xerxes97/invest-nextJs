@@ -18,7 +18,7 @@ export type IInvestmentModel = IInvestmentDTO & IGeneralModelProps;
 
 export interface ITransactionDTO {
   id: number;
-  typeId: number;
+  typeId: string;
   date: string;
   description: string;
   amount: number;
