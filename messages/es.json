@@ -1,6 +1,6 @@
 {
-  "investments": {
-    "title": "Investments",
+  "piggy": {
+    "title": "Piggies",
     "name": "Name",
     "description": "Description",
     "amount": "Amount",
@@ -11,9 +11,9 @@
     "platform": "Platform",
     "balance": "Balance",
     "type": "Type",
-    "new": "New Investment",
-    "remove": "Remove Investment - {investment}",
-    "removeConfirm": "Are you sure you want to remove {investment} investment?"
+    "new": "New Piggy",
+    "remove": "Remove Piggy - {investment}",
+    "removeConfirm": "Are you sure you want to remove {investment} Piggy?"
   },
   "transactions": {
     "createTransaction": "New Transaction - {investment}",

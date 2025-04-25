@@ -56,8 +56,8 @@ export const useApp = (): IpageInitialContext => {
 
   // ==========================================================
 
-  // Investments
-  // New investment control section
+  // piggy
+  // New Piggy control section
 
   const saveNewInvestment = async (body: IInvestmentDTO): Promise<void> => {
     body.amount = fixNumberFormat(body.amount);
@@ -68,9 +68,9 @@ export const useApp = (): IpageInitialContext => {
     const func = Investment.create(body, `?userId=${1}`);
     alertPromise({
       func,
-      loading: t("investments.newLoading"),
-      success: t("investments.newSuccess"),
-      error: t("investments.newError"),
+      loading: t("piggy.newLoading"),
+      success: t("piggy.newSuccess"),
+      error: t("piggy.newError"),
     });
     closeNewInvestmentModal();
   };
@@ -81,9 +81,9 @@ export const useApp = (): IpageInitialContext => {
       const func = Investment.remove(investmentId);
       alertPromise({
         func,
-        loading: t("investments.removeLoading"),
-        success: t("investments.removeSuccess"),
-        error: t("investments.removeError"),
+        loading: t("piggy.removeLoading"),
+        success: t("piggy.removeSuccess"),
+        error: t("piggy.removeError"),
       });
     }
     closeRemoveInvestmentDialog();

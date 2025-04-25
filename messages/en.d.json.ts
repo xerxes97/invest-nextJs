@@ -2,8 +2,8 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  "investments": {
-    "title": "Investments",
+  "piggy": {
+    "title": "Piggies",
     "name": "Name",
     "description": "Description",
     "amount": "Amount",
@@ -14,7 +14,7 @@ declare const messages: {
     "platform": "Platform",
     "balance": "Balance",
     "type": "Type",
-    "new": "New Investment" 
+    "new": "New Piggy" 
   },
   "transactions": {
     "createTransaction": "New Transaction - {{investment}}",
