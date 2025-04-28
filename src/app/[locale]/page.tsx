@@ -1,8 +1,9 @@
+"use client";
 import { InvestmentList } from "./(investments)/components";
 import { IInvestmentModel } from "@/models/investments";
 import { PageProvider } from "./(investments)/context";
 import { locales } from "@/i18n/routing";
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 
 const CreateInvestmentForm = lazy(
   () => import("./(investments)/components/CreateInvestmentForm")
@@ -21,13 +22,16 @@ const getData = async (): Promise<IInvestmentModel[]> => {
   return res.json();
 };
 
-export function generateStaticParams() {
-  console.log("⚡ Generando rutas para:", locales);
-  return locales.map((locale) => ({ locale }));
-}
+// export function generateStaticParams() {
+//   console.log("⚡ Generando rutas para:", locales);
+//   return locales.map((locale) => ({ locale }));
+// }
 
-export default async function Home() {
-  const investments = await getData();
+export default function Home() {
+  // const investments = await getData();
+  const [investments, setInvestments] = useState<IInvestmentModel[]>([]);
+
+  useEffect(() => { getData().then(setInvestments); }, []);
 
   return (
     <PageProvider>
