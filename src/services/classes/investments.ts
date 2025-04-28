@@ -1,5 +1,5 @@
-import { IOrmConstructor } from "./interfaces";
-import Orm from "./client/orm";
+import { IOrmConstructor } from "../client/interfaces";
+import Orm from "../client/orm";
 import { IInvestmentDTO } from "@/models/investments";
 
 const ENDPOINT_NAME = 'investments';
@@ -13,4 +13,5 @@ export class InvestmentClass extends Orm<IInvestmentDTO> {
 export const Investment = new InvestmentClass({
   endpointName: ENDPOINT_NAME,
 });
+
 export default Investment;

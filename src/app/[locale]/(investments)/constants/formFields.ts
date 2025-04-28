@@ -11,7 +11,19 @@ export const CreateInvestmentFieldsList: IAppFormFieldProps[] = [
 ];
 
 export const CreateInvestmentTransactionFieldsList: IAppFormFieldProps[] = [
-  { name: "typeId", label: "type", type: "select" },
-  { name: "amount", label: "Amount", type: "number" },
+  {
+    name: "typeId",
+    label: "type",
+    type: "asyncSelect",
+    resource: "transaction-types",
+    placeholder: "",
+    formatOptions: (options) =>
+      options.map((option) => ({
+        label: option.name,
+        value: String(option.id),
+        status: option.status,
+      })),
+  },
   { name: "description", label: "Description", type: "text" },
+  { name: "amount", label: "Amount", type: "number" },
 ];

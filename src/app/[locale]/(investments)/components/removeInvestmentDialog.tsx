@@ -11,7 +11,7 @@ export const RemoveInvestmentDialog = () => {
     events: { closeRemoveInvestmentDialog: onClose, removeInvestment },
   } = usePageContext();
 
-  const t = useTranslations("investments");
+  const t = useTranslations("piggy");
 
   const title = t("remove", { investment: investmentInfo?.name ?? "" });
   const content = t("removeConfirm", {

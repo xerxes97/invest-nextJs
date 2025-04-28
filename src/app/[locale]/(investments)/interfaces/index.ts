@@ -1,4 +1,8 @@
-import { IInvestmentDTO, IInvestmentModel } from "@/models/investments";
+import {
+  IInvestmentDTO,
+  IInvestmentModel,
+  ITransactionDTO,
+} from "@/models/investments";
 
 export interface IpageInitialState {
   newInvestmentModalOpen: boolean;
@@ -14,11 +18,13 @@ export interface IpageInitialContext extends IpageInitialState {
   events: {
     openNewInvestmentTransactionModal: (data: IControlInvestmentModel) => void;
     closeNewInvestmentTransactionModal: () => void;
-    newTransaction: (data: IControlInvestmentModel) => Promise<void>;
+    newTransaction: (data: ITransactionDTO) => Promise<void>;
     // ==========================================================
     openNewInvestmentModal: () => void;
     closeNewInvestmentModal: () => void;
-    openRemoveInvestmentDialog: (data: IControlInvestmentModel) => Promise<void>;
+    openRemoveInvestmentDialog: (
+      data: IControlInvestmentModel
+    ) => Promise<void>;
     closeRemoveInvestmentDialog: () => void;
     removeInvestment: () => Promise<void>;
     saveNewInvestment: (data: IInvestmentDTO) => Promise<void>;

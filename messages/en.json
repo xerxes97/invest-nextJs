@@ -1,6 +1,6 @@
 {
-  "investments": {
-    "title": "Investments",
+  "piggy": {
+    "title": "Piggies",
     "name": "Name",
     "description": "Description",
     "amount": "Amount",
@@ -11,31 +11,35 @@
     "platform": "Platform",
     "balance": "Balance",
     "type": "Type",
-    "new": "New Investment",
-    "newCreating": "Creating Investment",
-    "newSuccess": "New Investment created successfully",
-    "newError": "Error creating Investment",
-    "remove": "Remove Investment - {investment}",
-    "removeError": "Error removing Investment",
-    "removeSuccess": "Investment removed successfully",
-    "removeLoading": "Removing Investment",
-    "removeConfirm": "Are you sure you want to remove {investment} investment?"
+    "new": "New Piggy",
+    "newLoading": "Creating Piggy",
+    "newSuccess": "New Piggy created successfully",
+    "newError": "Error creating Piggy",
+    "remove": "Remove Piggy - {investment}",
+    "removeError": "Error removing Piggy",
+    "removeSuccess": "Piggy removed successfully",
+    "removeLoading": "Removing Piggy",
+    "removeConfirm": "Are you sure you want to remove {investment} Piggy?"
   },
   "transactions": {
     "createTransaction": "New Transaction - {investment}",
     "amount": "Amount",
     "date": "Date",
-    "description": "Description"
+    "description": "Description",
+    "newLoading": "Creating Transaction",
+    "newSuccess": "Transaction created successfully",
+    "newError": "Error creating Transaction"
   },
   "common": {
     "period": "Period",
     "description": "Description",
     "date": "Date",
     "select": "Select",
-    "loading": "Loading",
+    "loading": "Loading...",
     "save": "Save",
     "cancel": "Cancel",
     "close": "Close",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "noOptions": "No options"
   }
 }
