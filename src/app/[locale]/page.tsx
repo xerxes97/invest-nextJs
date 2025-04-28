@@ -2,7 +2,7 @@
 import { InvestmentList } from "./(investments)/components";
 import { IInvestmentModel } from "@/models/investments";
 import { PageProvider } from "./(investments)/context";
-import { locales } from "@/i18n/routing";
+// import { locales } from "@/i18n/routing";
 import { lazy, useEffect, useState } from "react";
 
 const CreateInvestmentForm = lazy(
