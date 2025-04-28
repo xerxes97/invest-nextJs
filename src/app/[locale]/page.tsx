@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { InvestmentList } from "./(investments)/components";
 import { IInvestmentModel } from "@/models/investments";
 import { PageProvider } from "./(investments)/context";
