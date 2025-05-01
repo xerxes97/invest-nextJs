@@ -6,6 +6,10 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { Toaster } from "sonner";
+import { AppSidebar } from "@/components/common";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { cookies } from "next/headers";
+import { AppToolBar } from "../../components/common";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,14 +47,27 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
 
+  const cookieStore = await cookies();
+  const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
+
   return (
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider>
-          <Toaster expand={true} richColors />
-          <main className="px-6">{children}</main>
+          <SidebarProvider defaultOpen={defaultOpen}>
+            <Toaster expand={true} richColors />
+            <AppSidebar />
+            <div className="w-full">
+              <AppToolBar />
+              <main className="px-6 mt-6">
+                <SidebarTrigger />
+                {children}
+              </main>
+            </div>
+            {/* <main className="px-6 w-[calc(100% - 280px)]">{children}</main> */}
+          </SidebarProvider>
         </NextIntlClientProvider>
       </body>
     </html>
